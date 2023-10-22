@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Редактировать студента</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select {
+      width: 300px;
+      padding: 5px;
+    }
+
+    button {
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    a {
+      margin-top: 10px;
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #008CBA;
+      color: white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: #007B9F;
+    }
+  </style>
+</head>
+<body>
+<h1>Редактировать студента: <span th:text="${student.fullname}"></span></h1>
+<form method="post" th:action="@{/students/{id}/edit(id=${student.id})}">
+  <label for="fullname">ФИО:</label>
+  <input type="text" id="fullname" name="fullname" th:value="${student.fullname}" />
+  <label for="admissionDate">Дата зачисления:</label>
+  <input type="text" id="admissionDate" name="admissionDate" th:value="${student.admissionDate}" />
+  <label for="groupId">Группа:</label>
+  <select id="groupId" name="groupId">
+    <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}"
+            th:selected="${group.id == student.group.id}"></option>
+  </select>
+  <button type="submit">Сохранить</button>
+</form>
+<a th:href="@{/students/{id}(id=${student.id})}">Отмена</a>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Просмотр студента</title>
+</head>
+<body>
+<h1>Студент: <span th:text="${student.fullname}"></span></h1>
+<p>ID: <span th:text="${student.id}"></span></p>
+<p>Дата рождения: <span th:text="${student.admissionDate}"></span></p>
+<p>Группа: <span th:text="${student.group.name}"></span></p>
+<a th:href="@{/students/{id}/edit(id=${student.id})}">Редактировать</a>
+<a th:href="@{/students}">Назад к списку студентов</a>
+</body>
+</html>

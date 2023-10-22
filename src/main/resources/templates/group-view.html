@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактировать группу</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            margin-top: 10px;
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #008CBA;
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            background-color: #007B9F;
+        }
+    </style>
+</head>
+<body>
+<h1>Название группы: <span th:text="${group.name}"></span></h1>
+<h2>Таблица студентов:</h2>
+<table>
+    <tr>
+        <th>ФИО</th>
+        <th>Дата поступления</th>
+    </tr>
+    <tr th:each="student : ${group.students}">
+        <td th:text="${student.fullname}"></td>
+        <td th:text="${student.admissionDate}"></td>
+    </tr>
+</table>
+<form method="post" th:action="@{/groups/{id}/edit(id=${group.id})}">
+    <label for="name">Название:</label>
+    <input type="text" id="name" name="name" th:value="${group.name}" />
+    <button type="submit">Сохранить</button>
+</form>
+<a th:href="@{/groups}">Отмена</a>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Список студентов</title>
+  <style>
+    body {
+      background-color: #F5F5F5;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border: 1px solid #CCCCCC;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #CCCCCC;
+    }
+
+    tr:hover {
+      background-color: #F7F7F7;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight:bold;
+      text-decoration: none;
+      background-color: #3498DB;
+      color: white;
+      border-radius: 4px;
+    }
+
+    a.button:hover {
+      background-color: #217dbb;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<h1>Список студентов</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>ФИО</th>
+    <th>Дата зачисления</th>
+    <th>Группа</th>
+  </tr>
+  <tr th:each="student : ${students}">
+    <td th:text="${student.id}"></td>
+    <td><a th:href="@{/students/{id}(id=${student.id})}" th:text="${student.fullname}"></a></td>
+    <td th:text="${student.admissionDate}"></td>
+    <td th:text="${student.group.name}"></td>
+  </tr>
+</table>
+<a th:href="@{/students/create}" class="button">Создать нового студента</a>
+</body>
+</html>

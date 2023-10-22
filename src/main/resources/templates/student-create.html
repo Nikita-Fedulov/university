@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Создать нового студента</title>
+</head>
+<body>
+<h1>Создать нового студента</h1>
+<form method="post" th:action="@{/students/create}">
+    <label for="fullname">ФИО:</label>
+    <input type="text" id="fullname" name="fullname" />
+    <label for="admissionDate">Дата зачисления:</label>
+    <input type="text" id="admissionDate" name="admissionDate" />
+    <label for="groupId">Группа:</label>
+    <select id="groupId" name="groupId">
+        <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}"></option>
+    </select>
+    <button type="submit">Создать</button>
+</form>
+<a th:href="@{/students}">Назад к списку студентов</a>
+</body>
+</html>
